@@ -27,7 +27,7 @@ Player.ItemCheck_Shoot.hook((orig, self, i, sItem, weaponDamage) => {
 
     /* 
     * @param {number} amount
-    * return Bait multiplicate by amount
+    * @returns Bait multiplicate by amount
     */
     function MultiplyBaits(amount = 0) {
         activeBait = amount;
