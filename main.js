@@ -2,6 +2,7 @@ import { using } from './ModClasses.js';
 
 using('Terraria');
 using('Terraria.Chat');
+using('Microsoft.Xna.Framework')
 using('Microsoft.Xna.Framework.Graphics')
 
 let NewCombatText =
@@ -13,7 +14,9 @@ let activeBait = 0;
 let quantityBait = 0;
 
 
-
+const Vector2_New =(x, y) => {
+    return Vector2.new()['void .ctor(float x, float y)'](x,y)
+}
 /**
  * @todo Saves the current configuration to the "ModConfig.json" file.
  * @see https://github.com/TerLauncher/TL-Mods/wiki/JavaScript-API#tl.mod.dataDirectory
@@ -79,9 +82,10 @@ Player.ItemCheck_Shoot.hook((orig, self, i, sItem, weaponDamage) => {
             Array.from(Main.projectile).forEach(projectile => {
                 if (amount <= 0) return;
                     if (sItem.fishingPole > 0 && amount > 0 && projectile.bobber) {
+                    
                     Projectile['int NewProjectile(IEntitySource spawnSource, Vector2 position, Vector2 velocity, int Type, int Damage, float KnockBack, int Owner, float ai0, float ai1, float ai2)'](
                         Projectile.GetNoneSource(),
-                        projectile.position,
+                        projectile.position = Main.player[0].direction == 1 ? Vector2_New(projectile.position.X + 15, projectile.position.Y + 2): projectile.position,
                         projectile.velocity,
                         sItem.shoot,
                         0,
